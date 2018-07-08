@@ -9,6 +9,7 @@ module Setsy
     }.freeze
 
     delegate_missing_to :to_s
+    alias :as_json :value
     def initialize(options)
       @attribute_value = options[:value]
       @default = options[:default]
@@ -27,12 +28,8 @@ module Setsy
       @default ||= cast(@default)
     end
 
-    def as_json
-      cast(@attribute_value)
-    end
-
     def default?
-      cast(@attribute_value) == cast(@default)
+      value == default
     end
 
     private
