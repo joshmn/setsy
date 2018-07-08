@@ -43,10 +43,6 @@ module Setsy
       end
     end
 
-    def respond_to_missing?(m, include_private = false)
-      @settings.key?(m) || "#{SETTING_PREFIX}#{m}" || super
-    end
-
     def attributes
       keys = @settings.keys
       keys.push(*methods.select { |m| m.to_s.starts_with?(SETTING_PREFIX) }.map { |m| m.to_s.gsub(SETTING_PREFIX, '') })
