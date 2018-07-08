@@ -2,8 +2,8 @@
 
 module Setsy
   class Configuration
-    include ActiveModel::Model
     extend ActiveModel::Naming
+    include ActiveModel::Model
     include ActiveModel::Serializers::JSON
 
     def self.readers
@@ -20,11 +20,7 @@ module Setsy
       set = set.dup.with_indifferent_access
       record.class.setsy_default.each do |k, v|
         result = {}
-        result[:value] = if v.is_a?(Hash)
-                           v[:value]
-                         else
-                           v
-                         end
+        result[:value] = v.is_a?(Hash) ? v[:value] : v
         result[:default] = result[:value]
         result[:value] = set[k] if set[k]
         hash[k] = result
@@ -59,7 +55,7 @@ module Setsy
       keys.push(*methods.select { |m| m.to_s.starts_with?('setting__') }.map { |m| m.to_s.gsub('setting__', '') })
       h = {}
       keys.each do |k|
-        h[k] = k
+        h[k.to_sym] = k
       end
       h
     end

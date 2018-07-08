@@ -11,6 +11,10 @@ module Setsy
       @to_s ||= cast(@attribute_value).to_s
     end
 
+    def value
+      @value ||= cast(@attribute_value)
+    end
+
     def default
       @default ||= cast(@default)
     end
@@ -30,6 +34,9 @@ module Setsy
         klass = @default.class.to_s
         if %w[true false trueclass falseclass].include?(klass.to_s.downcase)
           klass = 'Boolean'
+        end
+        if %w{fixnum}.include?(klass.to_s.downcase)
+          klass = 'Integer'
         end
         klass
       end
