@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Setsy
   module DSL
     def self.included(base)
