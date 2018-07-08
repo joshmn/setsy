@@ -41,8 +41,8 @@ module Setsy
         else
           @settings[m]
         end
-      elsif respond_to?("setting__#{m}")
-        send("setting__#{m}")
+      elsif respond_to?("#{SETTING_PREFIX}#{m}")
+        send("#{SETTING_PREFIX}#{m}")
       else
         super
       end
