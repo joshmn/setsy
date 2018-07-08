@@ -13,8 +13,13 @@ describe Setsy do
       expect(@new_user.settings.attributes.keys).to eq([:posts_limit, :marketing_emails, :posts_and_marketing])
     end
     describe 'attribute' do
-      it 'has a default' do
+      it 'has a value' do
         expect(@new_user.settings.posts_limit.value).to eq(10)
+      end
+      it 'behaves like a string' do
+        expect("#{@new_user.settings.posts_limit}").to eq("10")
+      end
+      it 'has a default' do
         expect(@new_user.settings.posts_limit.default?).to be_truthy
       end
     end
