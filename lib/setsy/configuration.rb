@@ -63,7 +63,7 @@ module Setsy
 
     def write_reader(k, v)
       class_eval do
-        define_method("setting__#{k}") do
+        define_method("#{SETTING_PREFIX}#{k}") do
           instance_eval &v
         end
       end
