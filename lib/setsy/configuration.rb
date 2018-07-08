@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'attribute'
-
 module Setsy
   class Configuration
     include ActiveModel::Model
@@ -45,7 +43,6 @@ module Setsy
     def method_missing(m, *args, &block)
       if @hash.key?(m)
         if @hash[m].is_a?(Hash)
-          abort
           @hash[m][:value]
         else
           @hash[m]
