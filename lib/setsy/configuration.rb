@@ -6,6 +6,7 @@ module Setsy
     include ActiveModel::Model
     include ActiveModel::Serializers::JSON
     SETTING_PREFIX = 'setting__'
+
     def self.readers
       @readers ||= {}
     end
@@ -36,11 +37,7 @@ module Setsy
 
     def method_missing(m, *args, &block)
       if @settings.key?(m)
-        if @settings[m].is_a?(Hash)
-          @settings[m][:value]
-        else
-          @settings[m]
-        end
+        @settings[m]
       elsif respond_to?("#{SETTING_PREFIX}#{m}")
         send("#{SETTING_PREFIX}#{m}")
       else
