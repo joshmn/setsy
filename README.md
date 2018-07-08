@@ -65,7 +65,7 @@ Posts limit is <%= @user.settings.posts_limit %>
 
 ## Testing
 
-This has no tests. But it's battle-tested.
+See `spec`
 
 ## Contributing
 
