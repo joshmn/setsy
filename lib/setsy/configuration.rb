@@ -16,32 +16,32 @@ module Setsy
     end
 
     def self.from_set(record, set, readers = {})
-      hash = {}
+      settings = {}
       set = set.dup.with_indifferent_access
       record.class.setsy_default.each do |k, v|
         result = {}
         result[:value] = v.is_a?(Hash) ? v[:value] : v
         result[:default] = result[:value]
         result[:value] = set[k] if set[k]
-        hash[k] = result
+        settings[k] = Attribute.new(result)
       end
-      new(record, hash, readers)
+      new(record, settings, readers)
     end
 
-    def initialize(record, hash, readers = {})
+    def initialize(record, settings, readers = {})
       @record = record
-      @hash = cast(hash)
+      @settings = settings
 
       @attributes = {}
       write_readers(readers)
     end
 
     def method_missing(m, *args, &block)
-      if @hash.key?(m)
-        if @hash[m].is_a?(Hash)
-          @hash[m][:value]
+      if @settings.key?(m)
+        if @settings[m].is_a?(Hash)
+          @settings[m][:value]
         else
-          @hash[m]
+          @settings[m]
         end
       elsif respond_to?("setting__#{m}")
         send("setting__#{m}")
@@ -51,19 +51,11 @@ module Setsy
     end
 
     def attributes
-      keys = @hash.keys
+      keys = @settings.keys
       keys.push(*methods.select { |m| m.to_s.starts_with?('setting__') }.map { |m| m.to_s.gsub('setting__', '') })
       h = {}
       keys.each do |k|
         h[k.to_sym] = k
-      end
-      h
-    end
-
-    def cast(hash)
-      h = {}
-      hash.each do |k, v|
-        h[k] = Attribute.new(v)
       end
       h
     end
