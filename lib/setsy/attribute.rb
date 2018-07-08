@@ -22,7 +22,7 @@ module Setsy
     def value
       @value ||= cast(@attribute_value)
     end
-    alias :as_json :value
+    alias as_json value
 
     def default
       @default ||= cast(@default)
