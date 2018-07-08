@@ -5,7 +5,7 @@ module Setsy
     extend ActiveModel::Naming
     include ActiveModel::Model
     include ActiveModel::Serializers::JSON
-
+    SETTING_PREFIX = 'setting__'
     def self.readers
       @readers ||= {}
     end
@@ -50,7 +50,7 @@ module Setsy
 
     def attributes
       keys = @settings.keys
-      keys.push(*methods.select { |m| m.to_s.starts_with?('setting__') }.map { |m| m.to_s.gsub('setting__', '') })
+      keys.push(*methods.select { |m| m.to_s.starts_with?(SETTING_PREFIX) }.map { |m| m.to_s.gsub(SETTING_PREFIX, '') })
       h = {}
       keys.each do |k|
         h[k.to_sym] = k
@@ -61,9 +61,7 @@ module Setsy
     private
 
     def write_readers(readers)
-      readers.each do |k, v|
-        write_reader(k, v)
-      end
+      readers.each { |k,v| write_reader(k, v) }
     end
 
     def write_reader(k, v)
