@@ -1,5 +1,13 @@
 module Setsy
   class Attribute
+    KLASS_MAP = {
+        'true' => 'Boolean',
+        'false' => 'Boolean',
+        'trueclass' => 'Boolean',
+        'falseclass' => 'Boolean',
+        'fixnum' => 'Integer'
+    }.freeze
+
     delegate_missing_to :to_s
     def initialize(options)
       @attribute_value = options[:value]
@@ -32,12 +40,7 @@ module Setsy
     def klass
       @klass ||= begin
         klass = @default.class.to_s
-        if %w[true false trueclass falseclass].include?(klass.to_s.downcase)
-          klass = 'Boolean'
-        end
-        if %w{fixnum}.include?(klass.to_s.downcase)
-          klass = 'Integer'
-        end
+        klass = KLASS_MAP[klass.to_s.downcase] || klass
         klass
       end
     end

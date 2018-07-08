@@ -5,7 +5,7 @@ module Setsy
     extend ActiveModel::Naming
     include ActiveModel::Model
     include ActiveModel::Serializers::JSON
-    SETTING_PREFIX = 'setting__'
+    SETTING_PREFIX = 'setting__'.freeze
 
     def self.readers
       @readers ||= {}
