@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Setsy do
   before :all do
     @new_user = User.new(:name => "Bob")
-    @user = User.create(:name => "John", :settings_data => { :posts_limit => 50, :marketing_emails => true})
+    @user = User.create(:name => "John", :settings_data => {:posts_limit => 50, :marketing_emails => true})
   end
   describe '#settings' do
     it 'is responded to' do
