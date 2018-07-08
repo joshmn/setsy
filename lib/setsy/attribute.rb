@@ -41,13 +41,12 @@ module Setsy
       @klass ||= begin
         klass = @default.class.to_s
         klass = KLASS_MAP[klass.to_s.downcase] || klass
-        klass
+        klass.downcase.to_sym
       end
     end
 
     def cast(val)
-      val = val.is_a?(Hash) ? val[:value] : val
-      ActiveModel::Type.lookup(klass.downcase.to_sym).cast(val)
+      ActiveModel::Type.lookup(klass).cast(val)
     end
   end
 end
