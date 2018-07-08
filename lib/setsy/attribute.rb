@@ -32,7 +32,7 @@ module Setsy
     end
 
     def default?
-      cast(@attribute_value) === cast(@default)
+      cast(@attribute_value) == cast(@default)
     end
 
     private
