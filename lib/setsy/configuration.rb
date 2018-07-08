@@ -31,8 +31,6 @@ module Setsy
     def initialize(record, settings, readers = {})
       @record = record
       @settings = settings
-
-      @attributes = {}
       write_readers(readers)
     end
 
@@ -66,14 +64,6 @@ module Setsy
       readers.each do |k, v|
         write_reader(k, v)
       end
-    end
-
-    def value_for(k)
-      if @record.class.setsy_default[k].is_a?(Hash)
-        @record.class.setsy_default[k][:value]
-      else
-        @record.class.setsy_default[k]
-      end.class
     end
 
     def write_reader(k, v)
