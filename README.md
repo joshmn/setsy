@@ -4,7 +4,7 @@ Settings for your classes. Depends on ActiveRecord, ActiveModel, and ActiveSuppo
 
 ## Note
 
-This is really gross and not pretty right now.
+This is not very tidy as it is. But it's battle-tested.
 
 ## Installation
 

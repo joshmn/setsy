@@ -44,7 +44,7 @@ module Setsy
     end
 
     def respond_to_missing?(m, include_private = false)
-      @settings.key?(m) || "#{SETTING_PREFIX}#{m}" || super 
+      @settings.key?(m) || "#{SETTING_PREFIX}#{m}" || super
     end
 
     def attributes
