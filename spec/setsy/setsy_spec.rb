@@ -12,8 +12,14 @@ describe Setsy do
     it 'have three attributes' do
       expect(@new_user.settings.attributes.keys).to eq([:posts_limit, :marketing_emails, :posts_and_marketing])
     end
+    it 'can be a hash thing' do
+      expect(@new_user.settings[:posts_limit]).to be_a(Setsy::Attribute)
+      expect(@new_user.settings['posts_limit']).to be_a(Setsy::Attribute)
+      expect(@new_user.settings[:posts_limit].value).to eq(10)
+    end
     describe 'attribute' do
       it 'has a value' do
+        expect(@new_user.settings.posts_limit).to be_a(Setsy::Attribute)
         expect(@new_user.settings.posts_limit.value).to eq(10)
       end
       it 'behaves like a string' do

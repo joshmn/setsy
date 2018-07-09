@@ -43,6 +43,10 @@ module Setsy
       end
     end
 
+    def [](val)
+      send(val.to_sym)
+    end
+
     def attributes
       keys = @settings.keys
       keys.push(*methods.select { |m| m.to_s.starts_with?(SETTING_PREFIX) }.map { |m| m.to_s.gsub(SETTING_PREFIX, '') })
