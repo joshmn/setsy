@@ -6,6 +6,10 @@ Settings for your classes. Depends on ActiveRecord, ActiveModel, and ActiveSuppo
 
 This is not very tidy as it is. But it's battle-tested.
 
+## You want this if...
+
+You want this if you don't want to have a zillion columns per model to manage your settings.
+
 ## Installation
 
 Add this line to your application's Gemfile:
