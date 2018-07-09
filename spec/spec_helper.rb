@@ -46,7 +46,7 @@ RSpec.configure do |config|
           posts_limit: 10,
           marketing_emails: false
       }
-      setsy :settings, column: :settings_data, defaults: SETSY_DEFAULTS do |conf|
+      setsy :settings do |conf|
         conf.reader :posts_and_marketing do
           "User has #{posts_limit} post limit and marketing emails are #{marketing_emails}"
         end

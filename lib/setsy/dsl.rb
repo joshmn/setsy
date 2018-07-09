@@ -3,10 +3,11 @@ module Setsy
     def self.included(base)
       base.extend ClassMethods
     end
-
     module ClassMethods
       def setsy(attribute_name, options = {})
         readers = {}
+        options[:column] ||= "#{attribute_name}_data".to_sym
+        options[:defaults] ||= self.const_defined?(:SETSY_DEFAULTS) ? self.const_get(:SETSY_DEFAULTS) : {}
         readers = yield(Setsy::Configuration) if block_given?
         class_eval do
           define_method(:setsy_configuration) do
