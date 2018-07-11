@@ -21,7 +21,13 @@ module Setsy
         result = {}
         result[:value] = v.is_a?(Hash) ? v[:value] : v
         result[:default] = result[:value]
-        result[:value] = set[k] if set[k]
+        if set[k]
+          if set[k].is_a?(Hash)
+            result[:value] = set[k][:value]
+          else
+            result[:value] = set[k]
+          end
+        end
         settings[k] = Attribute.new(result)
       end
       new(record, settings, readers)

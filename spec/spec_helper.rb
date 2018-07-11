@@ -44,7 +44,8 @@ RSpec.configure do |config|
       include ::Setsy::DSL
       SETSY_DEFAULTS = {
           posts_limit: 10,
-          marketing_emails: false
+          marketing_emails: false,
+          color: { value: 'blue' }
       }
       setsy :settings do |conf|
         conf.reader :posts_and_marketing do
