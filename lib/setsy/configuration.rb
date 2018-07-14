@@ -39,6 +39,10 @@ module Setsy
       write_readers(readers)
     end
 
+    def [](val)
+      send(val)
+    end
+
     def method_missing(m, *args, &block)
       if @settings.key?(m)
         @settings[m]
