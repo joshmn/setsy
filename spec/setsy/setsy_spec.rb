@@ -23,6 +23,12 @@ describe Setsy do
       it 'has a default' do
         expect(@new_user.settings.posts_limit.default?).to be_truthy
       end
+      it 'acts like []' do 
+        expect(@new_user.settings[:posts_limit].to_s).to eq(@new_user.settings.posts_limit.to_s)
+      end
+      it 'calls to_s for everything' do 
+        expect("#{@new_user.settings.posts_limit.to_f}").to eq("#{@new_user.settings.posts_limit.to_s.to_f}")
+      end
     end
     describe 'reader attribute' do
       it 'returns what it is supposed to' do

@@ -1,6 +1,6 @@
 # Setsy
 
-Settings for your classes. Depends on ActiveRecord, ActiveModel, and ActiveSupport 5.1 (okay so Rails 5.1+), but a PR can take care of this easily!
+Settings for your classes. Depends on ActiveModel 3.0+.
 
 ## Note
 

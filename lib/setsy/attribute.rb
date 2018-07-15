@@ -8,7 +8,6 @@ module Setsy
         'fixnum' => 'Integer'
     }.freeze
 
-    delegate_missing_to :to_s
     def initialize(options)
       @attribute_value = options[:value]
       @default = options[:default]
@@ -31,6 +30,27 @@ module Setsy
     def default?
       value == default
     end
+
+    def respond_to_missing?(name, include_private = false)
+      to_s.respond_to?(name) || super
+    end
+
+    def method_missing(method, *args, &block)
+      if to_s.respond_to?(method)
+        to_s.public_send(method, *args, &block)
+      else
+        begin
+          super
+        rescue NoMethodError
+          if to_s.nil?
+            raise DelegationError, "\#{to_s} delegated to #{to_s}, but #{to_s} is nil"
+          else
+            raise
+          end
+        end
+      end
+    end
+    
 
     private
 
