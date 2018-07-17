@@ -2,6 +2,10 @@
 
 Settings for your classes. Depends on ActiveModel 3.0+.
 
+## Obligatory blog post
+
+[Here](http://josh.mn/2018/07/17/introducing-setsy/).
+
 ## Note
 
 This is not very tidy as it is. But it's battle-tested.
